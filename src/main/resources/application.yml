@@ -1,0 +1,13 @@
+server:
+    contextPath: /services/rest
+
+spring:
+  # JPA Properties
+  jpa:
+    database: hsql  
+  
+  # DataSource Properties
+  datasource:
+    url: jdbc:hsqldb:mem:testdb
+    username: sa
+    password: 
