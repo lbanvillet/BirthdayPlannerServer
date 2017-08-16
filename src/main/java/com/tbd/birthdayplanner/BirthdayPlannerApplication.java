@@ -1,3 +1,8 @@
+/*
+ *-----------------------------------------------------------------------------
+ * Copyright 2017 TBD
+ *-----------------------------------------------------------------------------
+ */
 package com.tbd.birthdayplanner;
 
 import org.springframework.boot.SpringApplication;
