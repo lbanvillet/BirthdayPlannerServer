@@ -34,11 +34,6 @@ public class UserBasicData implements Serializable {
     private String name;
 
     /**
-     * Whether the user is real or not.
-     */
-    private boolean virtual;
-
-    /**
      * Retrieves the value for {@link #birthDate}.
      *
      * @return the current value
@@ -57,15 +52,6 @@ public class UserBasicData implements Serializable {
     }
 
     /**
-     * Retrieves the value for {@link #virtual}.
-     *
-     * @return the current value
-     */
-    public boolean isVirtual() {
-        return virtual;
-    }
-
-    /**
      * Provides a value for {@link #birthDate}.
      *
      * @param birthDate the new value to set
@@ -81,14 +67,5 @@ public class UserBasicData implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * Provides a value for {@link #virtual}.
-     *
-     * @param virtual the new value to set
-     */
-    public void setVirtual(boolean virtual) {
-        this.virtual = virtual;
     }
 }

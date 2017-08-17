@@ -7,7 +7,9 @@ package com.tbd.birthdayplanner.user;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.dozer.Mapper;
+import org.hsqldb.lib.StringUtil;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,9 +22,11 @@ import com.tbd.birthdayplanner.exception.ResourceAlreadyExistsException;
 import com.tbd.birthdayplanner.exception.ResourceDoesNotExistException;
 import com.tbd.birthdayplanner.user.dto.CreateUserRequest;
 import com.tbd.birthdayplanner.user.dto.UserBasicData;
+import com.tbd.birthdayplanner.user.dto.UserFollowRequest;
 import com.tbd.birthdayplanner.user.dto.UserIdData;
 import com.tbd.birthdayplanner.user.dto.UserLikeRequest;
 import com.tbd.birthdayplanner.user.dto.UserViewData;
+import com.tbd.birthdayplanner.util.RandomString;
 
 /**
  * Service that allows users to manage products.
@@ -75,6 +79,29 @@ public class UserController {
     }
 
     /**
+     * Add a user to follow. If this user's phone does not exist in the database, create a virtual {@link User}.
+     *
+     * @param userId the user to update
+     * @param request the request containing the details of the user to follow
+     */
+    @PostMapping(value = "/{phone}/followed-users")
+    public void addFollowedUser(UserIdData userId, @RequestBody UserFollowRequest request) {
+        User user = userDomainRegistry.get(userId);
+        User userToFollow = request.getUserId() == null || StringUtils.isEmpty(request.getUserId().getPhone()) ? null
+                : userDomainRegistry.find(request.getUserId());
+        if (null == userToFollow) {
+            userToFollow = mapper.map(request, User.class);
+            if (StringUtil.isEmpty(userToFollow.getPhone())) {
+                userToFollow.setPhone("VIRTUAL-" + new RandomString(30).nextString());
+            }
+            userToFollow.setVirtual(true);
+            userDomainRegistry.save(userToFollow);
+        }
+        user.getFollowedUsers().add(userToFollow);
+        userDomainRegistry.save(user);
+    }
+
+    /**
      * Add a user like.
      *
      * @param userId the user to update
@@ -93,7 +120,7 @@ public class UserController {
     }
 
     /**
-     * Creates a user.
+     * Creates a user. Used at registration time.
      *
      * @param request the user to create
      */
@@ -101,9 +128,9 @@ public class UserController {
     public void create(@RequestBody CreateUserRequest request) {
         User existingUser = userDomainRegistry.find(request.getUserId());
         if (null != existingUser) {
-
-            // Check if a virtual user becomes real
-            if (existingUser.isVirtual() && !request.isVirtual()) {
+            if (existingUser.isVirtual()) {
+                existingUser.setBirthDate(request.getBirthDate());
+                existingUser.setName(request.getName());
                 existingUser.setVirtual(false);
                 userDomainRegistry.save(existingUser);
             } else {
@@ -164,6 +191,23 @@ public class UserController {
         if (!user.getLikes().remove(request.getObject())) {
             throw new ResourceDoesNotExistException(
                     "'" + request.getObject() + "' is not a like for the user with phone '" + userId.getPhone() + "'.");
+        }
+        userDomainRegistry.save(user);
+    }
+
+    /**
+     * Remove a followed user.
+     *
+     * @param userId the user to update
+     * @param userToUnfollowId the identifier of the user to stop following
+     */
+    @DeleteMapping(value = "/{phone}/followed-users")
+    public void unfollowUser(UserIdData userId, @RequestBody UserIdData userToUnfollowId) {
+        User user = userDomainRegistry.get(userId);
+        User userToUnfollow = userDomainRegistry.get(userToUnfollowId);
+        if (!user.getFollowedUsers().remove(userToUnfollow)) {
+            throw new ResourceDoesNotExistException("The user with the phone '" + userToUnfollowId.getPhone()
+                    + "' is not followed by the user with the phone '" + userId.getPhone() + "'.");
         }
         userDomainRegistry.save(user);
     }

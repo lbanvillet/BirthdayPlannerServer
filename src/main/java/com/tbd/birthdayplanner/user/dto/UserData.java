@@ -30,12 +30,26 @@ public class UserData extends UserBasicData {
     private List<String> dislikes;
 
     /**
+     * The identifiers of the followed users.
+     */
+    private List<UserIdData> followedUsers;
+
+    /**
      * Retrieves the value for {@link #dislikes}.
      *
      * @return the current value
      */
     public List<String> getDislikes() {
         return dislikes;
+    }
+
+    /**
+     * Retrieves the value for {@link #followedUsers}.
+     *
+     * @return the current value
+     */
+    public List<UserIdData> getFollowedUsers() {
+        return followedUsers;
     }
 
     /**
@@ -54,6 +68,15 @@ public class UserData extends UserBasicData {
      */
     public void setDislikes(List<String> dislikes) {
         this.dislikes = dislikes;
+    }
+
+    /**
+     * Provides a value for {@link #followedUsers}.
+     *
+     * @param followedUsers the new value to set
+     */
+    public void setFollowedUsers(List<UserIdData> followedUsers) {
+        this.followedUsers = followedUsers;
     }
 
     /**

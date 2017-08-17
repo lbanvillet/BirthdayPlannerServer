@@ -74,7 +74,7 @@ public class User implements Serializable {
      * Whether the user is real or not.
      */
     @Column(name = "virtual")
-    private boolean virtual;
+    private boolean virtual = false;
 
     /**
      * The list of user likes.
@@ -93,6 +93,14 @@ public class User implements Serializable {
     private List<String> dislikes;
 
     /**
+     * The list of followed users.
+     */
+    @ElementCollection
+    @CollectionTable(name = "follower", joinColumns = @JoinColumn(name = "follower_id"))
+    @Column(name = "followed_id")
+    private List<User> followedUsers;
+
+    /**
      * Retrieves the value for {@link #birthDate}.
      *
      * @return the current value
@@ -108,6 +116,15 @@ public class User implements Serializable {
      */
     public List<String> getDislikes() {
         return dislikes;
+    }
+
+    /**
+     * Retrieves the value for {@link #followedUsers}.
+     *
+     * @return the current value
+     */
+    public List<User> getFollowedUsers() {
+        return followedUsers;
     }
 
     /**
@@ -171,6 +188,15 @@ public class User implements Serializable {
      */
     public void setDislikes(List<String> dislikes) {
         this.dislikes = dislikes;
+    }
+
+    /**
+     * Provides a value for {@link #followedUsers}.
+     *
+     * @param followedUsers the new value to set
+     */
+    public void setFollowedUsers(List<User> followedUsers) {
+        this.followedUsers = followedUsers;
     }
 
     /**

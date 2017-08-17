@@ -5,32 +5,22 @@
  */
 package com.tbd.birthdayplanner.user.dto;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 /**
- * View data of the product.
+ * Contains like/dislike request details.
  *
  * @author lb185112
  */
-public class UserViewData extends UserData {
+public class UserFollowRequest extends UserBasicData {
 
     /**
-     * Serial version UID.
+     * Default serial version UID.
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     * Identifier of the user provided by the client.
+     * Identifier of the user provided by the client. Can be null in this situation.
      */
-    @NotNull
-    @Valid
     private UserIdData userId;
-
-    /**
-     * Whether the user is real or not.
-     */
-    private boolean virtual;
 
     /**
      * Retrieves the value for {@link #userId}.
@@ -42,29 +32,11 @@ public class UserViewData extends UserData {
     }
 
     /**
-     * Retrieves the value for {@link #virtual}.
-     *
-     * @return the current value
-     */
-    public boolean isVirtual() {
-        return virtual;
-    }
-
-    /**
      * Provides a value for {@link #userId}.
      *
      * @param userId the new value to set
      */
     public void setUserId(UserIdData userId) {
         this.userId = userId;
-    }
-
-    /**
-     * Provides a value for {@link #virtual}.
-     *
-     * @param virtual the new value to set
-     */
-    public void setVirtual(boolean virtual) {
-        this.virtual = virtual;
     }
 }
