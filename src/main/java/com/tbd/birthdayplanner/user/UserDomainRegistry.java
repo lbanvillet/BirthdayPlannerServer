@@ -31,6 +31,16 @@ public class UserDomainRegistry {
     }
 
     /**
+     * Deletes a user from the data store.
+     *
+     * @param userId the identifier of the user to delete
+     */
+    public void delete(UserIdData userId) {
+        User userToDelete = get(userId);
+        userRepository.delete(userToDelete);
+    }
+
+    /**
      * Retrieves the user from the data store.
      *
      * @param userIdData the user to retrieve

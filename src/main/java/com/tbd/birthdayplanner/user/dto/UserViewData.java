@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author lb185112
  */
-public class UserViewData extends UserBasicData {
+public class UserViewData extends UserData {
 
     /**
      * Serial version UID.

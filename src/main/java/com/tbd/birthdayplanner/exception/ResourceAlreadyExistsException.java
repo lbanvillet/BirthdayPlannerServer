@@ -42,4 +42,13 @@ public class ResourceAlreadyExistsException extends BusinessException {
                 resourceClass.getAnnotation(ResourceIdentityProperties.class).key(), value));
         LOGGER.warn(getMessage());
     }
+
+    /**
+     * Construct the exception with a message.
+     *
+     * @param message the message to include in the exception.
+     */
+    public ResourceAlreadyExistsException(final String message) {
+        super(message);
+    }
 }

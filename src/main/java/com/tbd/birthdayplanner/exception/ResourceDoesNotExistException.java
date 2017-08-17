@@ -42,4 +42,13 @@ public class ResourceDoesNotExistException extends BusinessException {
                 resourceClass.getAnnotation(ResourceIdentityProperties.class).key(), value));
         LOGGER.warn(getMessage());
     }
+
+    /**
+     * Construct the exception with a message.
+     *
+     * @param message the message to include in the exception.
+     */
+    public ResourceDoesNotExistException(final String message) {
+        super(message);
+    }
 }
