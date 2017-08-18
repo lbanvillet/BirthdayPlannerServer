@@ -12,3 +12,11 @@ create table if not exists user_like (
 	user_id bigint,
 	user_like varchar (2000)
 );
+
+create table if not exists planner (
+	id bigint primary key,
+	birthday_guy_id bigint,
+	author_id bigint
+);
+
+create sequence seq_planner start with 1 increment by 1;

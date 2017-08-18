@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.tbd.birthdayplanner.planner.PlannerController;
+import com.tbd.birthdayplanner.planner.PlannerDomainRegistry;
+import com.tbd.birthdayplanner.planner.PlannerRepository;
 import com.tbd.birthdayplanner.user.UserController;
 import com.tbd.birthdayplanner.user.UserDomainRegistry;
 import com.tbd.birthdayplanner.user.UserRepository;
@@ -24,11 +27,36 @@ import com.tbd.birthdayplanner.user.UserRepository;
 public class ServicesConfiguration {
 
     /**
+     * Creates the planner controller.
+     *
+     * @param mapper used for mapping between DTO and DAO objects
+     * @param userDomainRegistry the user domain registry
+     * @param plannerDomainRegistry the planner domain registry
+     * @return the planner controller
+     */
+    @Bean
+    public PlannerController plannerController(Mapper mapper, UserDomainRegistry userDomainRegistry,
+            PlannerDomainRegistry plannerDomainRegistry) {
+        return new PlannerController(mapper, userDomainRegistry, plannerDomainRegistry);
+    }
+
+    /**
+     * Creates the planner domain registry.
+     *
+     * @param plannerRepository the planner repository
+     * @return the planner registry
+     */
+    @Bean
+    public PlannerDomainRegistry plannerDomainRegistry(PlannerRepository plannerRepository) {
+        return new PlannerDomainRegistry(plannerRepository);
+    }
+
+    /**
      * Creates the user controller.
      *
      * @param mapper used for mapping between DTO and DAO objects
-     * @param userDomainRegistry the product domain registry
-     * @return the user service
+     * @param userDomainRegistry the user domain registry
+     * @return the user controller
      */
     @Bean
     public UserController userController(Mapper mapper, UserDomainRegistry userDomainRegistry) {

@@ -13,15 +13,18 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.tbd.birthdayplanner.planner.Planner;
 import com.tbd.birthdayplanner.validation.ValidKey;
 
 /**
@@ -101,6 +104,13 @@ public class User implements Serializable {
     private List<User> followedUsers;
 
     /**
+     * The list of planners.
+     */
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private List<Planner> planners;
+
+    /**
      * Retrieves the value for {@link #birthDate}.
      *
      * @return the current value
@@ -161,6 +171,15 @@ public class User implements Serializable {
      */
     public String getPhone() {
         return phone;
+    }
+
+    /**
+     * Retrieves the value for {@link #planners}.
+     *
+     * @return the current value
+     */
+    public List<Planner> getPlanners() {
+        return planners;
     }
 
     /**
@@ -233,6 +252,15 @@ public class User implements Serializable {
      */
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    /**
+     * Provides a value for {@link #planners}.
+     *
+     * @param planners the new value to set
+     */
+    public void setPlanners(List<Planner> planners) {
+        this.planners = planners;
     }
 
     /**

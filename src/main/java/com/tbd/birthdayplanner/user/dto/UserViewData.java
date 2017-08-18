@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * View data of the product.
+ * View data of the user.
  *
  * @author lb185112
  */

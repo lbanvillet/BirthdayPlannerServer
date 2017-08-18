@@ -8,10 +8,12 @@ package com.tbd.birthdayplanner.user.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
- * Defines the basic data for a user.
+ * Defines the basic data for a planner.
  *
  * @author lb185112
  */
@@ -26,6 +28,7 @@ public class UserBasicData implements Serializable {
      * The user birth date.
      */
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @NotEmpty
     private Date birthDate;
 
     /**

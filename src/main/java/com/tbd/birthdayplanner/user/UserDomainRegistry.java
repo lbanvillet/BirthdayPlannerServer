@@ -51,7 +51,7 @@ public class UserDomainRegistry {
     }
 
     /**
-     * Retrieves the user from the data store.
+     * Retrieves the user from the data store. Throws a {@link ResourceDoesNotExistException} if not found.
      *
      * @param userIdData the user to retrieve
      * @return the {@link User} with given identifier, if it exists
@@ -65,7 +65,7 @@ public class UserDomainRegistry {
     }
 
     /**
-     * Saves the given product.
+     * Saves the given user.
      *
      * @param userToSave the user to save
      * @return {@link User}
