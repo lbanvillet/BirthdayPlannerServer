@@ -5,7 +5,8 @@ The backend for the birthday planner app
 Create user (needs to check if a virtual user exists)  
 Update user  
 Delete user  
-GetUser (user details + planners associated + wishlist)
+Get user (user details + wishlist)  
+Get user's planners summary  
 User exists (by name or mobile or both)  
 Add user like  
 Remove user like  
