@@ -24,7 +24,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
 
-import com.tbd.birthdayplanner.planner.Planner;
+import com.tbd.birthdayplanner.participation.Participation;
 import com.tbd.birthdayplanner.validation.ValidKey;
 
 /**
@@ -104,11 +104,11 @@ public class User implements Serializable {
     private List<User> followedUsers;
 
     /**
-     * The list of planners.
+     * The list of participations.
      */
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id")
-    private List<Planner> planners;
+    @JoinColumn(name = "participant_id")
+    private List<Participation> participations;
 
     /**
      * Retrieves the value for {@link #birthDate}.
@@ -165,21 +165,21 @@ public class User implements Serializable {
     }
 
     /**
+     * Retrieves the value for {@link #participations}.
+     *
+     * @return the current value
+     */
+    public List<Participation> getParticipations() {
+        return participations;
+    }
+
+    /**
      * Retrieves the value for {@link #phone}.
      *
      * @return the current value
      */
     public String getPhone() {
         return phone;
-    }
-
-    /**
-     * Retrieves the value for {@link #planners}.
-     *
-     * @return the current value
-     */
-    public List<Planner> getPlanners() {
-        return planners;
     }
 
     /**
@@ -246,21 +246,21 @@ public class User implements Serializable {
     }
 
     /**
+     * Provides a value for {@link #participations}.
+     *
+     * @param participations the new value to set
+     */
+    public void setParticipations(List<Participation> participations) {
+        this.participations = participations;
+    }
+
+    /**
      * Provides a value for {@link #phone}.
      *
      * @param phone the new value to set
      */
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    /**
-     * Provides a value for {@link #planners}.
-     *
-     * @param planners the new value to set
-     */
-    public void setPlanners(List<Planner> planners) {
-        this.planners = planners;
     }
 
     /**

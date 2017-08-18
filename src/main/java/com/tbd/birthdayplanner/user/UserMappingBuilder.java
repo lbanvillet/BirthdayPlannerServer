@@ -9,6 +9,7 @@ import org.dozer.loader.api.BeanMappingBuilder;
 import org.dozer.loader.api.TypeMappingOptions;
 
 import com.tbd.birthdayplanner.user.dto.CreateUserRequest;
+import com.tbd.birthdayplanner.user.dto.UserBasicViewData;
 import com.tbd.birthdayplanner.user.dto.UserFollowRequest;
 import com.tbd.birthdayplanner.user.dto.UserViewData;
 
@@ -39,5 +40,6 @@ public class UserMappingBuilder extends BeanMappingBuilder {
         mapping(UserFollowRequest.class, User.class, TypeMappingOptions.mapNull(false), TypeMappingOptions.oneWay())
                 .fields(USER_ID_PHONE_FIELD, PHONE_FIELD);
         mapping(User.class, UserViewData.class, TypeMappingOptions.mapNull(false)).fields(PHONE_FIELD, USER_ID_PHONE_FIELD);
+        mapping(User.class, UserBasicViewData.class, TypeMappingOptions.mapNull(false)).fields(PHONE_FIELD, USER_ID_PHONE_FIELD);
     }
 }

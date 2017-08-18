@@ -5,17 +5,26 @@
  */
 package com.tbd.birthdayplanner.planner.dto;
 
+import java.io.Serializable;
+
+import com.tbd.birthdayplanner.user.dto.UserBasicData;
+
 /**
- * View data of the planner.
+ * Defines the basic view data for a planner.
  *
  * @author lb185112
  */
-public class PlannerViewData extends PlannerBasicData {
+public class PlannerBasicViewData implements Serializable {
 
     /**
-     * Serial version UID.
+     * Default serial version UID.
      */
     private static final long serialVersionUID = 1L;
+
+    /**
+     * The guy we celebrate the birthday of.
+     */
+    private UserBasicData birthdayGuy;
 
     /**
      * Whether the gift list has been validated or not.
@@ -26,6 +35,15 @@ public class PlannerViewData extends PlannerBasicData {
      * Whether the event has been completed or not.
      */
     private boolean isEventCompleted;
+
+    /**
+     * Retrieves the value for {@link #birthdayGuy}.
+     *
+     * @return the current value
+     */
+    public UserBasicData getBirthdayGuy() {
+        return birthdayGuy;
+    }
 
     /**
      * Retrieves the value for {@link #isEventCompleted}.
@@ -43,6 +61,15 @@ public class PlannerViewData extends PlannerBasicData {
      */
     public boolean isGiftListValidated() {
         return isGiftListValidated;
+    }
+
+    /**
+     * Provides a value for {@link #birthdayGuy}.
+     *
+     * @param birthdayGuy the new value to set
+     */
+    public void setBirthdayGuy(UserBasicData birthdayGuy) {
+        this.birthdayGuy = birthdayGuy;
     }
 
     /**

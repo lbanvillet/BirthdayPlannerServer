@@ -31,6 +31,16 @@ public class PlannerDomainRegistry {
     }
 
     /**
+     * Deletes a planner from the data store.
+     *
+     * @param plannerId the identifier of the planner to delete
+     */
+    public void delete(PlannerIdData plannerId) {
+        Planner plannerToDelete = get(plannerId);
+        plannerRepository.delete(plannerToDelete);
+    }
+
+    /**
      * Retrieves the planner from the data store.
      *
      * @param plannerIdData the planner to retrieve

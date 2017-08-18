@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tbd.birthdayplanner.exception.ResourceAlreadyExistsException;
 import com.tbd.birthdayplanner.exception.ResourceDoesNotExistException;
 import com.tbd.birthdayplanner.user.dto.CreateUserRequest;
-import com.tbd.birthdayplanner.user.dto.GetUserPlannersSummaryView;
+import com.tbd.birthdayplanner.user.dto.GetUserParticipationsResponse;
 import com.tbd.birthdayplanner.user.dto.UserBasicData;
 import com.tbd.birthdayplanner.user.dto.UserFollowRequest;
 import com.tbd.birthdayplanner.user.dto.UserIdData;
@@ -165,15 +165,15 @@ public class UserController {
     }
 
     /**
-     * Retrieves a summarized view of the user planners to display in a planner list.
+     * Retrieves the user participations.
      *
-     * @param userId the user to get
-     * @return the user
+     * @param userId the user to get participations of
+     * @return the user's participations
      */
-    @GetMapping(value = "/{phone}/planners")
-    public GetUserPlannersSummaryView getUserPlannersSummary(UserIdData userId) {
+    @GetMapping(value = "/{phone}/participations")
+    public GetUserParticipationsResponse getParticipations(UserIdData userId) {
         User user = userDomainRegistry.get(userId);
-        return mapper.map(user, GetUserPlannersSummaryView.class);
+        return mapper.map(user, GetUserParticipationsResponse.class);
     }
 
     /**

@@ -20,3 +20,14 @@ create table if not exists planner (
 );
 
 create sequence seq_planner start with 1 increment by 1;
+
+create table if not exists participation (
+	id bigint primary key,
+	participant_id bigint,
+	planner_id bigint,
+	average_price_proposed float,
+	is_author char not null,
+	approved char not null
+);
+
+create sequence seq_participation start with 1 increment by 1;

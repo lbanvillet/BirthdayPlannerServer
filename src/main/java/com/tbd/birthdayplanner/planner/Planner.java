@@ -6,17 +6,22 @@
 package com.tbd.birthdayplanner.planner;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.tbd.birthdayplanner.participation.Participation;
 import com.tbd.birthdayplanner.user.User;
 
 /**
@@ -54,19 +59,27 @@ public class Planner implements Serializable {
     private User birthdayGuy;
 
     /**
-     * The author of the event.
+     * The list of participants.
      */
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapKeyJoinColumn(name = "author_id")
-    private User author;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "planner_id")
+    private List<Participation> participants;
 
     /**
-     * Retrieves the value for {@link #author}.
-     *
-     * @return the current value
+     * Initializes an instance of <code>Planner</code> with the default data.
      */
-    public User getAuthor() {
-        return author;
+    public Planner() {
+        super();
+    }
+
+    /**
+     * Initializes an instance of <code>Planner</code> with the provided data.
+     *
+     * @param birthdayGuy the guy we celebrate the birthday of
+     */
+    public Planner(User birthdayGuy) {
+        super();
+        this.birthdayGuy = birthdayGuy;
     }
 
     /**
@@ -88,12 +101,12 @@ public class Planner implements Serializable {
     }
 
     /**
-     * Provides a value for {@link #author}.
+     * Retrieves the value for {@link #participants}.
      *
-     * @param author the new value to set
+     * @return the current value
      */
-    public void setAuthor(User author) {
-        this.author = author;
+    public List<Participation> getParticipants() {
+        return participants;
     }
 
     /**
@@ -112,5 +125,14 @@ public class Planner implements Serializable {
      */
     public void setId(long id) {
         this.id = id;
+    }
+
+    /**
+     * Provides a value for {@link #participants}.
+     *
+     * @param participants the new value to set
+     */
+    public void setParticipants(List<Participation> participants) {
+        this.participants = participants;
     }
 }

@@ -6,7 +6,7 @@ Create user (needs to check if a virtual user exists)
 Update user  
 Delete user  
 Get user (user details + wishlist)  
-Get user's planners summary  
+Get user's participations  
 User exists (by name or mobile or both)  
 Add user like  
 Remove user like  
@@ -18,8 +18,9 @@ Add follower
 Create planner  
 Delete planner  
 Get planner  
-Add attendee  
-Remove attendee  
+Get planner's participations  
+Add participant  
+Remove participant  
 Add gift  
 Remove gift  
 Validate gift list  
