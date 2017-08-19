@@ -29,12 +29,12 @@ public class PlannerBasicViewData implements Serializable {
     /**
      * Whether the gift list has been validated or not.
      */
-    private boolean isGiftListValidated;
+    private boolean giftListValidated;
 
     /**
      * Whether the event has been completed or not.
      */
-    private boolean isEventCompleted;
+    private boolean eventCompleted;
 
     /**
      * Retrieves the value for {@link #birthdayGuy}.
@@ -46,21 +46,21 @@ public class PlannerBasicViewData implements Serializable {
     }
 
     /**
-     * Retrieves the value for {@link #isEventCompleted}.
+     * Retrieves the value for {@link #eventCompleted}.
      *
      * @return the current value
      */
     public boolean isEventCompleted() {
-        return isEventCompleted;
+        return eventCompleted;
     }
 
     /**
-     * Retrieves the value for {@link #isGiftListValidated}.
+     * Retrieves the value for {@link #giftListValidated}.
      *
      * @return the current value
      */
     public boolean isGiftListValidated() {
-        return isGiftListValidated;
+        return giftListValidated;
     }
 
     /**
@@ -73,20 +73,20 @@ public class PlannerBasicViewData implements Serializable {
     }
 
     /**
-     * Provides a value for {@link #isEventCompleted}.
+     * Provides a value for {@link #eventCompleted}.
      *
      * @param isEventCompleted the new value to set
      */
     public void setEventCompleted(boolean isEventCompleted) {
-        this.isEventCompleted = isEventCompleted;
+        this.eventCompleted = isEventCompleted;
     }
 
     /**
-     * Provides a value for {@link #isGiftListValidated}.
+     * Provides a value for {@link #giftListValidated}.
      *
      * @param isGiftListValidated the new value to set
      */
     public void setGiftListValidated(boolean isGiftListValidated) {
-        this.isGiftListValidated = isGiftListValidated;
+        this.giftListValidated = isGiftListValidated;
     }
 }

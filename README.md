@@ -18,17 +18,16 @@ Add follower
 Create planner  
 Delete planner  
 Get planner  
-Get planner's participations  
+Get planner's participants  
 Add participant  
 Remove participant  
+Get planner's gifts  
 Add gift  
-Remove gift  
+Remove gift (only author)  
 Validate gift list  
 Mark as complete  
 
 /gifts  
-Create gift  
-Delete gift (only author)  
 Like gift (not for author)  
 Dislike gift (not for author)  
 Assign buyer  

@@ -50,5 +50,6 @@ public class ResourceDoesNotExistException extends BusinessException {
      */
     public ResourceDoesNotExistException(final String message) {
         super(message);
+        LOGGER.warn(getMessage());
     }
 }

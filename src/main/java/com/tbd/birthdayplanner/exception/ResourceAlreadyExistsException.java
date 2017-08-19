@@ -50,5 +50,6 @@ public class ResourceAlreadyExistsException extends BusinessException {
      */
     public ResourceAlreadyExistsException(final String message) {
         super(message);
+        LOGGER.warn(getMessage());
     }
 }

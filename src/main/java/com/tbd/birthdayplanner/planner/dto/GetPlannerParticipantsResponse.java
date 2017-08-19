@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Contains the user's participations.
+ * Contains the planner's participants.
  *
  * @author lb185112
  */

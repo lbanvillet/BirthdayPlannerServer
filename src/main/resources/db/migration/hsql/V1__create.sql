@@ -16,7 +16,8 @@ create table if not exists user_like (
 create table if not exists planner (
 	id bigint primary key,
 	birthday_guy_id bigint,
-	author_id bigint
+	gift_list_validated char not null,
+	event_completed char not null
 );
 
 create sequence seq_planner start with 1 increment by 1;
@@ -31,3 +32,32 @@ create table if not exists participation (
 );
 
 create sequence seq_participation start with 1 increment by 1;
+
+create table if not exists gift (
+	id bigint primary key,
+	planner_id bigint,
+	name varchar (256),
+	detail varchar (2000),
+	buyer_id bigint,
+	author_id bigint,
+	collected char not null
+);
+
+create sequence seq_gift start with 1 increment by 1;
+
+create table if not exists gift_like (
+	gift_id bigint,
+	user_id bigint
+);
+
+create table if not exists gift_dislike (
+	gift_id bigint,
+	user_id bigint
+);
+
+create table if not exists gift_comment (
+	id bigint primary key,
+	gift_id bigint,
+	author_id bigint,
+	comment varchar (2000)
+);
