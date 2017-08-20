@@ -3,22 +3,25 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.user;
+package com.tbd.birthdayplanner;
 
 import org.dozer.loader.api.BeanMappingBuilder;
 import org.dozer.loader.api.TypeMappingOptions;
 
+import com.tbd.birthdayplanner.gift.Gift;
+import com.tbd.birthdayplanner.gift.dto.GiftBasicViewData;
+import com.tbd.birthdayplanner.user.User;
 import com.tbd.birthdayplanner.user.dto.CreateUserRequest;
 import com.tbd.birthdayplanner.user.dto.UserBasicViewData;
 import com.tbd.birthdayplanner.user.dto.UserFollowRequest;
 import com.tbd.birthdayplanner.user.dto.UserViewData;
 
 /**
- * Mapping builder used for users.
+ * Mapping builder.
  *
  * @author lb185112
  */
-public class UserMappingBuilder extends BeanMappingBuilder {
+public class MappingBuilder extends BeanMappingBuilder {
 
     /**
      * Field <code>userId.phone</code>
@@ -31,6 +34,16 @@ public class UserMappingBuilder extends BeanMappingBuilder {
     private static final String PHONE_FIELD = "phone";
 
     /**
+     * Field <code>giftId.id</code>
+     */
+    private static final String GIFT_ID_FIELD = "giftId.id";
+
+    /**
+     * Field <code>id</code>
+     */
+    private static final String ID_FIELD = "id";
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -41,5 +54,6 @@ public class UserMappingBuilder extends BeanMappingBuilder {
                 .fields(USER_ID_PHONE_FIELD, PHONE_FIELD);
         mapping(User.class, UserViewData.class, TypeMappingOptions.mapNull(false)).fields(PHONE_FIELD, USER_ID_PHONE_FIELD);
         mapping(User.class, UserBasicViewData.class, TypeMappingOptions.mapNull(false)).fields(PHONE_FIELD, USER_ID_PHONE_FIELD);
+        mapping(Gift.class, GiftBasicViewData.class, TypeMappingOptions.mapNull(false)).fields(ID_FIELD, GIFT_ID_FIELD);
     }
 }

@@ -8,7 +8,7 @@ package com.tbd.birthdayplanner.planner.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import com.tbd.birthdayplanner.gift.dto.GiftBasicData;
+import com.tbd.birthdayplanner.gift.dto.GiftBasicViewData;
 
 /**
  * Contains the planner's gifts.
@@ -25,14 +25,14 @@ public class GetPlannerGiftsResponse implements Serializable {
     /**
      * The planner's gifts.
      */
-    private List<GiftBasicData> gifts;
+    private List<GiftBasicViewData> gifts;
 
     /**
      * Retrieves the value for {@link #gifts}.
      *
      * @return the current value
      */
-    public List<GiftBasicData> getGifts() {
+    public List<GiftBasicViewData> getGifts() {
         return gifts;
     }
 
@@ -41,7 +41,7 @@ public class GetPlannerGiftsResponse implements Serializable {
      *
      * @param gifts the new value to set
      */
-    public void setGifts(List<GiftBasicData> gifts) {
+    public void setGifts(List<GiftBasicViewData> gifts) {
         this.gifts = gifts;
     }
 }

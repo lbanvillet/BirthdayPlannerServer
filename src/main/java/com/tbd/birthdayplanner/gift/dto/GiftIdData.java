@@ -5,16 +5,17 @@
  */
 package com.tbd.birthdayplanner.gift.dto;
 
-import java.io.Serializable;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import com.tbd.birthdayplanner.common.ResourceData;
+import com.tbd.birthdayplanner.common.ResourceIdentityProperties;
+import com.tbd.birthdayplanner.validation.ValidKey;
 
 /**
- * Contains the gift name.
+ * ID data that represents minimum set of fields that uniquely identify a gift.
  *
  * @author lb185112
  */
-public class GiftIdData implements Serializable {
+@ResourceIdentityProperties(resource = "gift", key = "id")
+public class GiftIdData implements ResourceData {
 
     /**
      * Default serial version UID.
@@ -22,26 +23,26 @@ public class GiftIdData implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The name.
+     * The planner identifier.
      */
-    @NotEmpty
-    private String name;
+    @ValidKey
+    private Long id;
 
     /**
-     * Retrieves the value for {@link #name}.
+     * Retrieves the value for {@link #id}.
      *
      * @return the current value
      */
-    public String getName() {
-        return name;
+    public Long getId() {
+        return id;
     }
 
     /**
-     * Provides a value for {@link #name}.
+     * Provides a value for {@link #id}.
      *
-     * @param name the new value to set
+     * @param id the new value to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -5,6 +5,10 @@
  */
 package com.tbd.birthdayplanner.gift.dto;
 
+import java.io.Serializable;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.tbd.birthdayplanner.user.dto.UserIdData;
 
 /**
@@ -12,12 +16,18 @@ import com.tbd.birthdayplanner.user.dto.UserIdData;
  *
  * @author lb185112
  */
-public class GiftBasicData extends GiftIdData {
+public class GiftBasicData implements Serializable {
 
     /**
      * Default serial version UID.
      */
     private static final long serialVersionUID = 1L;
+
+    /**
+     * The name.
+     */
+    @NotEmpty
+    private String name;
 
     /**
      * The detail.
@@ -67,6 +77,15 @@ public class GiftBasicData extends GiftIdData {
     }
 
     /**
+     * Retrieves the value for {@link #name}.
+     *
+     * @return the current value
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Retrieves the value for {@link #collected}.
      *
      * @return the current value
@@ -109,5 +128,14 @@ public class GiftBasicData extends GiftIdData {
      */
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    /**
+     * Provides a value for {@link #name}.
+     *
+     * @param name the new value to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 }

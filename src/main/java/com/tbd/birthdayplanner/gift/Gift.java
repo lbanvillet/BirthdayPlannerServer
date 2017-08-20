@@ -6,6 +6,8 @@
 package com.tbd.birthdayplanner.gift;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -80,6 +84,28 @@ public class Gift implements Serializable {
     private boolean collected = false;
 
     /**
+     * The likes.
+     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "gift_like", joinColumns = {
+            @JoinColumn(name = "gift_id", nullable = false, updatable = false)
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "user_id", nullable = false, updatable = false)
+    })
+    private List<User> likes = new ArrayList<>();
+
+    /**
+     * The dislikes.
+     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "gift_dislike", joinColumns = {
+            @JoinColumn(name = "gift_id", nullable = false, updatable = false)
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "user_id", nullable = false, updatable = false)
+    })
+    private List<User> dislikes = new ArrayList<>();
+
+    /**
      * Initializes an instance of <code>Gift</code> with the default data.
      */
     public Gift() {
@@ -124,6 +150,33 @@ public class Gift implements Serializable {
      */
     public String getDetail() {
         return detail;
+    }
+
+    /**
+     * Retrieves the value for {@link #dislikes}.
+     *
+     * @return the current value
+     */
+    public List<User> getDislikes() {
+        return dislikes;
+    }
+
+    /**
+     * Retrieves the value for {@link #id}.
+     *
+     * @return the current value
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Retrieves the value for {@link #likes}.
+     *
+     * @return the current value
+     */
+    public List<User> getLikes() {
+        return likes;
     }
 
     /**
@@ -178,6 +231,33 @@ public class Gift implements Serializable {
      */
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    /**
+     * Provides a value for {@link #dislikes}.
+     *
+     * @param dislikes the new value to set
+     */
+    public void setDislikes(List<User> dislikes) {
+        this.dislikes = dislikes;
+    }
+
+    /**
+     * Provides a value for {@link #id}.
+     *
+     * @param id the new value to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    /**
+     * Provides a value for {@link #likes}.
+     *
+     * @param likes the new value to set
+     */
+    public void setLikes(List<User> likes) {
+        this.likes = likes;
     }
 
     /**

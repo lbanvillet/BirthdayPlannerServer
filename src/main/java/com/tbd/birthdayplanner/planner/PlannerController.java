@@ -19,8 +19,8 @@ import com.tbd.birthdayplanner.exception.BusinessException;
 import com.tbd.birthdayplanner.exception.ResourceDoesNotExistException;
 import com.tbd.birthdayplanner.exception.UnauthorizedException;
 import com.tbd.birthdayplanner.gift.Gift;
+import com.tbd.birthdayplanner.gift.GiftDomainRegistry;
 import com.tbd.birthdayplanner.gift.dto.GiftBasicData;
-import com.tbd.birthdayplanner.gift.dto.GiftIdData;
 import com.tbd.birthdayplanner.participation.Participation;
 import com.tbd.birthdayplanner.planner.dto.CreatePlannerRequest;
 import com.tbd.birthdayplanner.planner.dto.GetPlannerGiftsResponse;
@@ -40,22 +40,6 @@ import com.tbd.birthdayplanner.user.dto.UserIdData;
 @RestController
 @RequestMapping("/planners")
 public class PlannerController {
-
-    /**
-     * Retrieves the gift from the given planner with the given {@link GiftIdData}.
-     *
-     * @param planner the planner to look into
-     * @param giftId the gift to look for
-     * @return the {@link Gift} entity
-     */
-    private static Gift getGiftFromEntity(Planner planner, GiftIdData giftId) {
-        for (Gift gift : planner.getGifts()) {
-            if (giftId.getName().equals(gift.getName())) {
-                return gift;
-            }
-        }
-        return null;
-    }
 
     /**
      * Retrieves the participant from the given planner with the given {@link UserIdData}.
@@ -92,16 +76,25 @@ public class PlannerController {
     private PlannerDomainRegistry plannerDomainRegistry;
 
     /**
+     * Registry used to interact with {@link Gift} objects in the underlying data store.
+     */
+    @Resource
+    private GiftDomainRegistry giftDomainRegistry;
+
+    /**
      * Initializes an instance of <code>PlannerController</code> with the provided data.
      *
      * @param mapper - {@link #mapper}
      * @param userDomainRegistry - {@link #userDomainRegistry}
      * @param plannerDomainRegistry - {@link #plannerDomainRegistry}
+     * @param giftDomainRegistry - {@link #giftDomainRegistry}
      */
-    public PlannerController(Mapper mapper, UserDomainRegistry userDomainRegistry, PlannerDomainRegistry plannerDomainRegistry) {
+    public PlannerController(Mapper mapper, UserDomainRegistry userDomainRegistry, PlannerDomainRegistry plannerDomainRegistry,
+            GiftDomainRegistry giftDomainRegistry) {
         this.mapper = mapper;
         this.userDomainRegistry = userDomainRegistry;
         this.plannerDomainRegistry = plannerDomainRegistry;
+        this.giftDomainRegistry = giftDomainRegistry;
     }
 
     /**
@@ -114,9 +107,11 @@ public class PlannerController {
     public void addGift(PlannerIdData plannerId, @RequestBody GiftBasicData gift) {
         Planner planner = plannerDomainRegistry.get(plannerId);
         User author = userDomainRegistry.get(gift.getAuthor());
-        if (null != getGiftFromEntity(planner, gift)) {
-            throw new BusinessException("The gift with the name '" + gift.getName()
-                    + "' is already part of the gift list for the planner with id '" + plannerId.getId() + "'.");
+        for (Gift existingGift : planner.getGifts()) {
+            if (gift.getName().equals(existingGift.getName())) {
+                throw new BusinessException("The gift with the name '" + gift.getName()
+                        + "' is already part of the gift list for the planner with id '" + plannerId.getId() + "'.");
+            }
         }
         planner.getGifts().add(new Gift(gift.getName(), gift.getDetail(), author));
         plannerDomainRegistry.save(planner);
@@ -178,8 +173,8 @@ public class PlannerController {
     /**
      * Retrieves a planner.
      *
-     * @param plannerId the planner to get participants of
-     * @return the planner's participants
+     * @param plannerId the planner to get
+     * @return the planner
      */
     @GetMapping(value = "/{id}")
     public PlannerBasicViewData get(PlannerIdData plannerId) {
@@ -190,7 +185,7 @@ public class PlannerController {
     /**
      * Retrieves the planner gifts.
      *
-     * @param plannerId the planner to get
+     * @param plannerId the planner to get gifts of
      * @return the planner gifts
      */
     @GetMapping(value = "/{id}/gifts")
@@ -202,8 +197,8 @@ public class PlannerController {
     /**
      * Retrieves the planner participants.
      *
-     * @param plannerId the planner to get
-     * @return the planner participants
+     * @param plannerId the planner to get participants of
+     * @return the planner's participants
      */
     @GetMapping(value = "/{id}/participants")
     public GetPlannerParticipantsResponse getParticipants(PlannerIdData plannerId) {
@@ -220,11 +215,10 @@ public class PlannerController {
     @DeleteMapping(value = "/{id}/gifts")
     public void removeGift(PlannerIdData plannerId, @RequestBody RemoveGiftRequest request) {
         Planner planner = plannerDomainRegistry.get(plannerId);
-        Gift giftToRemove = getGiftFromEntity(planner, request);
+        Gift giftToRemove = giftDomainRegistry.get(request);
 
         if (null == giftToRemove) {
-            throw new ResourceDoesNotExistException("The gift with the name '" + request.getName()
-                    + "' is not a gift of the planner with the id '" + plannerId.getId() + "'.");
+            throw new ResourceDoesNotExistException("The gift with the id '" + request.getId() + "' is not a gift.");
         }
 
         if (!giftToRemove.getAuthor().getPhone().equals(request.getUserRemoving().getPhone())) {
@@ -232,8 +226,14 @@ public class PlannerController {
                     + "' is not the author of this gift and, therefore, he cannot remove it.");
         }
 
-        planner.getGifts().remove(giftToRemove);
+        if (!planner.getGifts().remove(giftToRemove)) {
+            throw new ResourceDoesNotExistException("The gift with the id '" + request.getId()
+                    + "' is not a gift of the planner with the id '" + plannerId.getId() + "'.");
+
+        }
+
         plannerDomainRegistry.save(planner);
+        giftDomainRegistry.delete(giftToRemove);
     }
 
     /**

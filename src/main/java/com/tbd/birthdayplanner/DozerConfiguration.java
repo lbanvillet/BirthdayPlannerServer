@@ -10,8 +10,6 @@ import org.dozer.Mapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.tbd.birthdayplanner.user.UserMappingBuilder;
-
 /**
  * Configuration for dozer mappings in the application context.
  *
@@ -28,7 +26,7 @@ public class DozerConfiguration {
     @Bean
     public Mapper mapper() {
         DozerBeanMapper mapper = new DozerBeanMapper();
-        mapper.addMapping(new UserMappingBuilder());
+        mapper.addMapping(new MappingBuilder());
         return mapper;
     }
 }

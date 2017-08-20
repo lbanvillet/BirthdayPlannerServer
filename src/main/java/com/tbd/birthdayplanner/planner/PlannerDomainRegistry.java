@@ -43,23 +43,23 @@ public class PlannerDomainRegistry {
     /**
      * Retrieves the planner from the data store.
      *
-     * @param plannerIdData the planner to retrieve
+     * @param plannerId the planner to retrieve
      * @return the found {@link Planner}, or <code>null</code> if no matching result is found
      */
-    public Planner find(PlannerIdData plannerIdData) {
-        return plannerRepository.findOne(plannerIdData.getId());
+    public Planner find(PlannerIdData plannerId) {
+        return plannerRepository.findOne(plannerId.getId());
     }
 
     /**
      * Retrieves the planner from the data store. Throws a {@link ResourceDoesNotExistException} if not found.
      *
-     * @param plannerIdData the planner to retrieve
+     * @param plannerId the planner to retrieve
      * @return the {@link Planner} with given identifier, if it exists
      */
-    public Planner get(PlannerIdData plannerIdData) {
-        Planner planner = find(plannerIdData);
+    public Planner get(PlannerIdData plannerId) {
+        Planner planner = find(plannerId);
         if (null == planner) {
-            throw new ResourceDoesNotExistException(PlannerIdData.class, plannerIdData.getId().toString());
+            throw new ResourceDoesNotExistException(PlannerIdData.class, plannerId.getId().toString());
         }
         return planner;
     }

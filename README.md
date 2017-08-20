@@ -28,8 +28,10 @@ Validate gift list
 Mark as complete  
 
 /gifts  
-Like gift (not for author)  
-Dislike gift (not for author)  
+Add like gift (not for author)  
+Remove like gift  
+Add dislike gift (not for author)  
+Remove dislike  
 Assign buyer  
 Mark as collected  
 Update detail  

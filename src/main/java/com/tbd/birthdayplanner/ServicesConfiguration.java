@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.tbd.birthdayplanner.gift.GiftController;
+import com.tbd.birthdayplanner.gift.GiftDomainRegistry;
+import com.tbd.birthdayplanner.gift.GiftRepository;
 import com.tbd.birthdayplanner.planner.PlannerController;
 import com.tbd.birthdayplanner.planner.PlannerDomainRegistry;
 import com.tbd.birthdayplanner.planner.PlannerRepository;
@@ -27,17 +30,42 @@ import com.tbd.birthdayplanner.user.UserRepository;
 public class ServicesConfiguration {
 
     /**
+     * Creates the gift controller.
+     *
+     * @param mapper used for mapping between DTO and DAO objects
+     * @param userDomainRegistry the user domain registry
+     * @param giftDomainRegistry the gift domain registry
+     * @return the gift controller
+     */
+    @Bean
+    public GiftController giftController(Mapper mapper, UserDomainRegistry userDomainRegistry, GiftDomainRegistry giftDomainRegistry) {
+        return new GiftController(mapper, userDomainRegistry, giftDomainRegistry);
+    }
+
+    /**
+     * Creates the gift domain registry.
+     *
+     * @param giftRepository the gift repository
+     * @return the gift registry
+     */
+    @Bean
+    public GiftDomainRegistry giftDomainRegistry(GiftRepository giftRepository) {
+        return new GiftDomainRegistry(giftRepository);
+    }
+
+    /**
      * Creates the planner controller.
      *
      * @param mapper used for mapping between DTO and DAO objects
      * @param userDomainRegistry the user domain registry
      * @param plannerDomainRegistry the planner domain registry
+     * @param giftDomainRegistry the gift domain registry
      * @return the planner controller
      */
     @Bean
     public PlannerController plannerController(Mapper mapper, UserDomainRegistry userDomainRegistry,
-            PlannerDomainRegistry plannerDomainRegistry) {
-        return new PlannerController(mapper, userDomainRegistry, plannerDomainRegistry);
+            PlannerDomainRegistry plannerDomainRegistry, GiftDomainRegistry giftDomainRegistry) {
+        return new PlannerController(mapper, userDomainRegistry, plannerDomainRegistry, giftDomainRegistry);
     }
 
     /**
