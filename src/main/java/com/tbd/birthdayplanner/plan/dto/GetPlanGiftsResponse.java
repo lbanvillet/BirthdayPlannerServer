@@ -3,7 +3,7 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.planner.dto;
+package com.tbd.birthdayplanner.plan.dto;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,11 +11,11 @@ import java.util.List;
 import com.tbd.birthdayplanner.gift.dto.GiftBasicViewData;
 
 /**
- * Contains the planner's gifts.
+ * Contains the plan's gifts.
  *
  * @author lb185112
  */
-public class GetPlannerGiftsResponse implements Serializable {
+public class GetPlanGiftsResponse implements Serializable {
 
     /**
      * Serial version UID.
@@ -23,7 +23,7 @@ public class GetPlannerGiftsResponse implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The planner's gifts.
+     * The plan's gifts.
      */
     private List<GiftBasicViewData> gifts;
 

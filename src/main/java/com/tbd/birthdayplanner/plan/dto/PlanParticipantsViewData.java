@@ -3,7 +3,7 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.planner.dto;
+package com.tbd.birthdayplanner.plan.dto;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ import com.tbd.birthdayplanner.user.dto.UserBasicViewData;
  *
  * @author lb185112
  */
-public class PlannerParticipantsViewData implements Serializable {
+public class PlanParticipantsViewData implements Serializable {
 
     /**
      * Serial version UID.
@@ -32,7 +32,7 @@ public class PlannerParticipantsViewData implements Serializable {
     private double averagePriceProposed;
 
     /**
-     * Whether the participant is the author of the planner or not.
+     * Whether the participant is the author of the plan or not.
      */
     private boolean isAuthor;
 

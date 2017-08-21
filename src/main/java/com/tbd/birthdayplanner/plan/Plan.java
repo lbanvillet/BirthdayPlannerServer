@@ -3,7 +3,7 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.planner;
+package com.tbd.birthdayplanner.plan;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,13 +27,13 @@ import com.tbd.birthdayplanner.gift.Gift;
 import com.tbd.birthdayplanner.user.User;
 
 /**
- * Data access object providing metadata about planners.
+ * Data access object providing metadata about plans.
  *
  * @author lb185112
  */
 @Entity
-@Table(name = "planner")
-public class Planner implements Serializable {
+@Table(name = "plan")
+public class Plan implements Serializable {
 
     /**
      * Default serial version UID.
@@ -41,16 +41,16 @@ public class Planner implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Sequence generator for the planner table.
+     * Sequence generator for the plan table.
      */
-    private static final String PLANNER_SEQUENCE = "seq_planner";
+    private static final String PLAN_SEQUENCE = "seq_plan";
 
     /**
-     * The planner id.
+     * The plan id.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = PLANNER_SEQUENCE)
-    @SequenceGenerator(name = PLANNER_SEQUENCE, sequenceName = PLANNER_SEQUENCE, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = PLAN_SEQUENCE)
+    @SequenceGenerator(name = PLAN_SEQUENCE, sequenceName = PLAN_SEQUENCE, allocationSize = 1)
     private long id;
 
     /**
@@ -64,41 +64,41 @@ public class Planner implements Serializable {
      * The list of participants.
      */
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "planner_id")
+    @JoinColumn(name = "plan_id")
     private List<Participation> participants = new ArrayList<>();
 
     /**
      * The list of gifts.
      */
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "planner_id")
+    @JoinColumn(name = "plan_id")
     private List<Gift> gifts = new ArrayList<>();
 
     /**
-     * Whether the planner's gift list has been validated or not.
+     * Whether the plan's gift list has been validated or not.
      */
     @Column(name = "is_gift_list_validated")
     private boolean giftListValidated = false;
 
     /**
-     * Whether the planner is completed or not.
+     * Whether the plan is completed or not.
      */
     @Column(name = "event_completed")
     private boolean eventCompleted = false;
 
     /**
-     * Initializes an instance of <code>Planner</code> with the default data.
+     * Initializes an instance of <code>Plan</code> with the default data.
      */
-    public Planner() {
+    public Plan() {
         super();
     }
 
     /**
-     * Initializes an instance of <code>Planner</code> with the provided data.
+     * Initializes an instance of <code>Plan</code> with the provided data.
      *
      * @param birthdayGuy the guy we celebrate the birthday of
      */
-    public Planner(User birthdayGuy) {
+    public Plan(User birthdayGuy) {
         super();
         this.birthdayGuy = birthdayGuy;
     }

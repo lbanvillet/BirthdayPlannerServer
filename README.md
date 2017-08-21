@@ -14,14 +14,14 @@ Add user dislike
 Remove user dislike  
 Add follower  
 
-/planners  
-Create planner  
-Delete planner  
-Get planner  
-Get planner's participants  
+/plans  
+Create plan  
+Delete plan  
+Get plan  
+Get plan's participants  
 Add participant  
 Remove participant  
-Get planner's gifts  
+Get plan's gifts  
 Add gift  
 Remove gift (only author)  
 Validate gift list  

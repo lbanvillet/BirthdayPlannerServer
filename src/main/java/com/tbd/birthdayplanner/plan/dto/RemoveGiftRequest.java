@@ -3,7 +3,7 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.planner.dto;
+package com.tbd.birthdayplanner.plan.dto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -12,7 +12,7 @@ import com.tbd.birthdayplanner.gift.dto.GiftIdData;
 import com.tbd.birthdayplanner.user.dto.UserIdData;
 
 /**
- * Contains details to remove a gift from a planner.
+ * Contains details to remove a gift from a plan.
  *
  * @author lb185112
  */

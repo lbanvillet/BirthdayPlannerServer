@@ -3,19 +3,19 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.planner.dto;
+package com.tbd.birthdayplanner.plan.dto;
 
 import com.tbd.birthdayplanner.common.ResourceData;
 import com.tbd.birthdayplanner.common.ResourceIdentityProperties;
 import com.tbd.birthdayplanner.validation.ValidKey;
 
 /**
- * ID data that represents minimum set of fields that uniquely identify a planner.
+ * ID data that represents minimum set of fields that uniquely identify a plan.
  *
  * @author lb185112
  */
-@ResourceIdentityProperties(resource = "planner", key = "id")
-public class PlannerIdData implements ResourceData {
+@ResourceIdentityProperties(resource = "plan", key = "id")
+public class PlanIdData implements ResourceData {
 
     /**
      * Default serial version UID.
@@ -23,7 +23,7 @@ public class PlannerIdData implements ResourceData {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The planner identifier.
+     * The plan identifier.
      */
     @ValidKey
     private Long id;

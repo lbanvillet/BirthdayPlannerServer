@@ -3,17 +3,17 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.planner.dto;
+package com.tbd.birthdayplanner.plan.dto;
 
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * Contains the planner's participants.
+ * Contains the plan's participants.
  *
  * @author lb185112
  */
-public class GetPlannerParticipantsResponse implements Serializable {
+public class GetPlanParticipantsResponse implements Serializable {
 
     /**
      * Serial version UID.
@@ -21,16 +21,16 @@ public class GetPlannerParticipantsResponse implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The planner's participants.
+     * The plan's participants.
      */
-    private List<PlannerParticipantsViewData> participants;
+    private List<PlanParticipantsViewData> participants;
 
     /**
      * Retrieves the value for {@link #participants}.
      *
      * @return the current value
      */
-    public List<PlannerParticipantsViewData> getParticipants() {
+    public List<PlanParticipantsViewData> getParticipants() {
         return participants;
     }
 
@@ -39,7 +39,7 @@ public class GetPlannerParticipantsResponse implements Serializable {
      *
      * @param participants the new value to set
      */
-    public void setParticipants(List<PlannerParticipantsViewData> participants) {
+    public void setParticipants(List<PlanParticipantsViewData> participants) {
         this.participants = participants;
     }
 }

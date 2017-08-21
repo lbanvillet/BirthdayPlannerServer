@@ -3,7 +3,7 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.planner;
+package com.tbd.birthdayplanner.plan;
 
 import java.io.Serializable;
 
@@ -55,11 +55,11 @@ public class Participation implements Serializable {
     private User participant;
 
     /**
-     * The planner.
+     * The plan.
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "planner_id")
-    private Planner planner;
+    @JoinColumn(name = "plan_id")
+    private Plan plan;
 
     /**
      * The average price proposed by the participant.
@@ -68,7 +68,7 @@ public class Participation implements Serializable {
     private double averagePriceProposed = -1;
 
     /**
-     * Whether the participant is the author of the planner or not.
+     * Whether the participant is the author of the plan or not.
      */
     @Column(name = "is_author")
     private boolean isAuthor = false;
@@ -90,14 +90,14 @@ public class Participation implements Serializable {
      * Initializes an instance of <code>Participation</code> with the provided data.
      *
      * @param participant the participant
-     * @param planner the planner
-     * @param isAuthor whether the participant is the author of the planner or not
+     * @param plan the plan
+     * @param isAuthor whether the participant is the author of the plan or not
      * @param approved whether the participant has approved or not
      */
-    public Participation(User participant, Planner planner, boolean isAuthor, boolean approved) {
+    public Participation(User participant, Plan plan, boolean isAuthor, boolean approved) {
         super();
         this.participant = participant;
-        this.planner = planner;
+        this.plan = plan;
         this.isAuthor = isAuthor;
         this.approved = approved;
     }
@@ -121,12 +121,12 @@ public class Participation implements Serializable {
     }
 
     /**
-     * Retrieves the value for {@link #planner}.
+     * Retrieves the value for {@link #plan}.
      *
      * @return the current value
      */
-    public Planner getPlanner() {
-        return planner;
+    public Plan getPlan() {
+        return plan;
     }
 
     /**
@@ -184,11 +184,11 @@ public class Participation implements Serializable {
     }
 
     /**
-     * Provides a value for {@link #planner}.
+     * Provides a value for {@link #plan}.
      *
-     * @param planner the new value to set
+     * @param plan the new value to set
      */
-    public void setPlanner(Planner planner) {
-        this.planner = planner;
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 }

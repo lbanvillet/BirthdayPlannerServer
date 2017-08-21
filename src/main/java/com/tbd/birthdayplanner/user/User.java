@@ -24,7 +24,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
 
-import com.tbd.birthdayplanner.planner.Participation;
+import com.tbd.birthdayplanner.plan.Participation;
 import com.tbd.birthdayplanner.validation.ValidKey;
 
 /**

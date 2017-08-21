@@ -13,19 +13,19 @@ create table if not exists user_like (
 	user_like varchar (2000)
 );
 
-create table if not exists planner (
+create table if not exists plan (
 	id bigint primary key,
 	birthday_guy_id bigint,
 	gift_list_validated char not null,
 	event_completed char not null
 );
 
-create sequence seq_planner start with 1 increment by 1;
+create sequence seq_plan start with 1 increment by 1;
 
 create table if not exists participation (
 	id bigint primary key,
 	participant_id bigint,
-	planner_id bigint,
+	plan_id bigint,
 	average_price_proposed float,
 	is_author char not null,
 	approved char not null
@@ -35,7 +35,7 @@ create sequence seq_participation start with 1 increment by 1;
 
 create table if not exists gift (
 	id bigint primary key,
-	planner_id bigint,
+	plan_id bigint,
 	name varchar (256),
 	detail varchar (2000),
 	buyer_id bigint,

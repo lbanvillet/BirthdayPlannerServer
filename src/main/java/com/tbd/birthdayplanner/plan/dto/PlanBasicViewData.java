@@ -3,18 +3,18 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.planner.dto;
+package com.tbd.birthdayplanner.plan.dto;
 
 import java.io.Serializable;
 
 import com.tbd.birthdayplanner.user.dto.UserBasicData;
 
 /**
- * Defines the basic view data for a planner.
+ * Defines the basic view data for a plan.
  *
  * @author lb185112
  */
-public class PlannerBasicViewData implements Serializable {
+public class PlanBasicViewData implements Serializable {
 
     /**
      * Default serial version UID.
@@ -78,7 +78,7 @@ public class PlannerBasicViewData implements Serializable {
      * @param isEventCompleted the new value to set
      */
     public void setEventCompleted(boolean isEventCompleted) {
-        this.eventCompleted = isEventCompleted;
+        eventCompleted = isEventCompleted;
     }
 
     /**
@@ -87,6 +87,6 @@ public class PlannerBasicViewData implements Serializable {
      * @param isGiftListValidated the new value to set
      */
     public void setGiftListValidated(boolean isGiftListValidated) {
-        this.giftListValidated = isGiftListValidated;
+        giftListValidated = isGiftListValidated;
     }
 }

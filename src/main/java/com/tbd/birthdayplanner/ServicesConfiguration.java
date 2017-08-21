@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.tbd.birthdayplanner.gift.GiftController;
 import com.tbd.birthdayplanner.gift.GiftDomainRegistry;
 import com.tbd.birthdayplanner.gift.GiftRepository;
-import com.tbd.birthdayplanner.planner.PlannerController;
-import com.tbd.birthdayplanner.planner.PlannerDomainRegistry;
-import com.tbd.birthdayplanner.planner.PlannerRepository;
+import com.tbd.birthdayplanner.plan.PlanController;
+import com.tbd.birthdayplanner.plan.PlanDomainRegistry;
+import com.tbd.birthdayplanner.plan.PlanRepository;
 import com.tbd.birthdayplanner.user.UserController;
 import com.tbd.birthdayplanner.user.UserDomainRegistry;
 import com.tbd.birthdayplanner.user.UserRepository;
@@ -54,29 +54,29 @@ public class ServicesConfiguration {
     }
 
     /**
-     * Creates the planner controller.
+     * Creates the plan controller.
      *
      * @param mapper used for mapping between DTO and DAO objects
      * @param userDomainRegistry the user domain registry
-     * @param plannerDomainRegistry the planner domain registry
+     * @param planDomainRegistry the plan domain registry
      * @param giftDomainRegistry the gift domain registry
-     * @return the planner controller
+     * @return the plan controller
      */
     @Bean
-    public PlannerController plannerController(Mapper mapper, UserDomainRegistry userDomainRegistry,
-            PlannerDomainRegistry plannerDomainRegistry, GiftDomainRegistry giftDomainRegistry) {
-        return new PlannerController(mapper, userDomainRegistry, plannerDomainRegistry, giftDomainRegistry);
+    public PlanController planController(Mapper mapper, UserDomainRegistry userDomainRegistry, PlanDomainRegistry planDomainRegistry,
+            GiftDomainRegistry giftDomainRegistry) {
+        return new PlanController(mapper, userDomainRegistry, planDomainRegistry, giftDomainRegistry);
     }
 
     /**
-     * Creates the planner domain registry.
+     * Creates the plan domain registry.
      *
-     * @param plannerRepository the planner repository
-     * @return the planner registry
+     * @param planRepository the plan repository
+     * @return the plan registry
      */
     @Bean
-    public PlannerDomainRegistry plannerDomainRegistry(PlannerRepository plannerRepository) {
-        return new PlannerDomainRegistry(plannerRepository);
+    public PlanDomainRegistry planDomainRegistry(PlanRepository planRepository) {
+        return new PlanDomainRegistry(planRepository);
     }
 
     /**

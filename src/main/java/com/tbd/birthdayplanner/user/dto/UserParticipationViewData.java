@@ -7,7 +7,7 @@ package com.tbd.birthdayplanner.user.dto;
 
 import java.io.Serializable;
 
-import com.tbd.birthdayplanner.planner.dto.PlannerBasicViewData;
+import com.tbd.birthdayplanner.plan.dto.PlanBasicViewData;
 
 /**
  * The details of a user's participation.
@@ -22,12 +22,12 @@ public class UserParticipationViewData implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The planner (contains the birthday guy).
+     * The plan (contains the birthday guy).
      */
-    private PlannerBasicViewData planner;
+    private PlanBasicViewData plan;
 
     /**
-     * Whether the participant is the author of the planner or not.
+     * Whether the participant is the author of the plan or not.
      */
     private boolean isAuthor;
 
@@ -37,12 +37,12 @@ public class UserParticipationViewData implements Serializable {
     private boolean approved;
 
     /**
-     * Retrieves the value for {@link #planner}.
+     * Retrieves the value for {@link #plan}.
      *
      * @return the current value
      */
-    public PlannerBasicViewData getPlanner() {
-        return planner;
+    public PlanBasicViewData getPlan() {
+        return plan;
     }
 
     /**
@@ -82,11 +82,11 @@ public class UserParticipationViewData implements Serializable {
     }
 
     /**
-     * Provides a value for {@link #planner}.
+     * Provides a value for {@link #plan}.
      *
-     * @param planner the new value to set
+     * @param plan the new value to set
      */
-    public void setPlanner(PlannerBasicViewData planner) {
-        this.planner = planner;
+    public void setPlan(PlanBasicViewData plan) {
+        this.plan = plan;
     }
 }

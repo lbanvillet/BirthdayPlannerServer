@@ -3,18 +3,18 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.planner.dto;
+package com.tbd.birthdayplanner.plan.dto;
 
 import java.io.Serializable;
 
 import com.tbd.birthdayplanner.user.dto.UserIdData;
 
 /**
- * Request object to create a planner.
+ * Request object to create a plan.
  *
  * @author lb185112
  */
-public class CreatePlannerRequest implements Serializable {
+public class CreatePlanRequest implements Serializable {
 
     /**
      * Serialization id.

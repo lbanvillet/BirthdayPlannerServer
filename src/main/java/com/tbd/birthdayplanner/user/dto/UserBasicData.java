@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
- * Defines the basic data for a planner.
+ * Defines the basic data for a plan.
  *
  * @author lb185112
  */
