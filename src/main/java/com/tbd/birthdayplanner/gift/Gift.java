@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -106,6 +108,13 @@ public class Gift implements Serializable {
     private List<User> dislikes = new ArrayList<>();
 
     /**
+     * The list of comments.
+     */
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "gift_id")
+    private List<GiftComment> comments = new ArrayList<>();
+
+    /**
      * Initializes an instance of <code>Gift</code> with the default data.
      */
     public Gift() {
@@ -141,6 +150,15 @@ public class Gift implements Serializable {
      */
     public User getBuyer() {
         return buyer;
+    }
+
+    /**
+     * Retrieves the value for {@link #comments}.
+     *
+     * @return the current value
+     */
+    public List<GiftComment> getComments() {
+        return comments;
     }
 
     /**
@@ -222,6 +240,15 @@ public class Gift implements Serializable {
      */
     public void setCollected(boolean collected) {
         this.collected = collected;
+    }
+
+    /**
+     * Provides a value for {@link #comments}.
+     *
+     * @param comments the new value to set
+     */
+    public void setComments(List<GiftComment> comments) {
+        this.comments = comments;
     }
 
     /**

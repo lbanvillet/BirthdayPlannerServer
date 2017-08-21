@@ -38,6 +38,20 @@ public class GiftViewData extends GiftBasicData {
     private List<UserIdData> dislikes = new ArrayList<>();
 
     /**
+     * The comments.
+     */
+    private List<GiftCommentIdData> comments = new ArrayList<>();
+
+    /**
+     * Retrieves the value for {@link #comments}.
+     *
+     * @return the current value
+     */
+    public List<GiftCommentIdData> getComments() {
+        return comments;
+    }
+
+    /**
      * Retrieves the value for {@link #likes}.
      *
      * @return the current value
@@ -62,6 +76,15 @@ public class GiftViewData extends GiftBasicData {
      */
     public List<UserIdData> getLikes() {
         return likes;
+    }
+
+    /**
+     * Provides a value for {@link #comments}.
+     *
+     * @param comments the new value to set
+     */
+    public void setComments(List<GiftCommentIdData> comments) {
+        this.comments = comments;
     }
 
     /**

@@ -21,7 +21,6 @@ import com.tbd.birthdayplanner.exception.UnauthorizedException;
 import com.tbd.birthdayplanner.gift.Gift;
 import com.tbd.birthdayplanner.gift.GiftDomainRegistry;
 import com.tbd.birthdayplanner.gift.dto.GiftBasicData;
-import com.tbd.birthdayplanner.participation.Participation;
 import com.tbd.birthdayplanner.planner.dto.CreatePlannerRequest;
 import com.tbd.birthdayplanner.planner.dto.GetPlannerGiftsResponse;
 import com.tbd.birthdayplanner.planner.dto.GetPlannerParticipantsResponse;

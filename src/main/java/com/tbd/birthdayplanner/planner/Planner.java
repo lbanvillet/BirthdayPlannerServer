@@ -24,7 +24,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.tbd.birthdayplanner.gift.Gift;
-import com.tbd.birthdayplanner.participation.Participation;
 import com.tbd.birthdayplanner.user.User;
 
 /**

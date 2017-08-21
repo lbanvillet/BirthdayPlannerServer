@@ -3,7 +3,7 @@
  * Copyright 2017 TBD
  *-----------------------------------------------------------------------------
  */
-package com.tbd.birthdayplanner.participation;
+package com.tbd.birthdayplanner.planner;
 
 import java.io.Serializable;
 
@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.tbd.birthdayplanner.planner.Planner;
 import com.tbd.birthdayplanner.user.User;
 
 /**

@@ -11,12 +11,12 @@ import com.tbd.birthdayplanner.common.ResourceData;
 import com.tbd.birthdayplanner.common.ResourceIdentityProperties;
 
 /**
- * ID data that represents minimum set of fields that uniquely identify a gift.
+ * ID data that represents minimum set of fields that uniquely identify a gift comment.
  *
  * @author lb185112
  */
-@ResourceIdentityProperties(resource = "gift", key = "id")
-public class GiftIdData implements ResourceData {
+@ResourceIdentityProperties(resource = "gift comment", key = "id")
+public class GiftCommentIdData implements ResourceData {
 
     /**
      * Default serial version UID.
@@ -24,7 +24,7 @@ public class GiftIdData implements ResourceData {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The gift identifier.
+     * The gift comment identifier.
      */
     @NotNull
     private Long id;

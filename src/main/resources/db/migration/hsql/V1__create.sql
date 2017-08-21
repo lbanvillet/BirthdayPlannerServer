@@ -61,3 +61,5 @@ create table if not exists gift_comment (
 	author_id bigint,
 	comment varchar (2000)
 );
+
+create sequence seq_gift_comment start with 1 increment by 1;

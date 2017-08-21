@@ -13,14 +13,21 @@ import org.dozer.Mapper;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tbd.birthdayplanner.exception.BusinessException;
 import com.tbd.birthdayplanner.exception.ResourceDoesNotExistException;
 import com.tbd.birthdayplanner.exception.UnauthorizedException;
+import com.tbd.birthdayplanner.gift.dto.GetGiftCommentsResponse;
+import com.tbd.birthdayplanner.gift.dto.GiftBasicData;
+import com.tbd.birthdayplanner.gift.dto.GiftCommentBasicData;
+import com.tbd.birthdayplanner.gift.dto.GiftCommentIdData;
 import com.tbd.birthdayplanner.gift.dto.GiftIdData;
 import com.tbd.birthdayplanner.gift.dto.GiftViewData;
+import com.tbd.birthdayplanner.gift.dto.UpdateGiftCommentRequest;
 import com.tbd.birthdayplanner.user.User;
 import com.tbd.birthdayplanner.user.UserDomainRegistry;
 import com.tbd.birthdayplanner.user.dto.UserIdData;
@@ -66,6 +73,20 @@ public class GiftController {
     }
 
     /**
+     * Add a comment.
+     *
+     * @param giftId the gift to update
+     * @param comment the comment to add
+     */
+    @PostMapping(value = "/{id}/comments")
+    public void addComment(GiftIdData giftId, @RequestBody GiftCommentBasicData comment) {
+        Gift gift = giftDomainRegistry.get(giftId);
+        User author = userDomainRegistry.get(comment.getAuthor());
+        gift.getComments().add(new GiftComment(comment.getComment(), author));
+        giftDomainRegistry.save(gift);
+    }
+
+    /**
      * Add a dislike.
      *
      * @param giftId the gift to update
@@ -100,6 +121,50 @@ public class GiftController {
     }
 
     /**
+     * Retrieves the gift comments.
+     *
+     * @param giftId the gift to get comments of
+     * @return the gift comments
+     */
+    @GetMapping(value = "/{id}/comments")
+    public GetGiftCommentsResponse getComments(GiftIdData giftId) {
+        Gift gift = giftDomainRegistry.get(giftId);
+        return mapper.map(gift, GetGiftCommentsResponse.class);
+    }
+
+    /**
+     * Remove a comment.
+     *
+     * @param giftId the gift to update
+     * @param userId the user that removes
+     * @param commentId the comment to remove
+     */
+    @DeleteMapping(value = "/{id}/comments/{phone}")
+    public void removeComment(GiftIdData giftId, UserIdData userId, @RequestBody GiftCommentIdData commentId) {
+        Gift gift = giftDomainRegistry.get(giftId);
+
+        GiftComment commentToRemove = null;
+        for (GiftComment comment : gift.getComments()) {
+            if (commentId.getId().longValue() == comment.getId()) {
+                commentToRemove = comment;
+            }
+        }
+
+        if (null == commentToRemove) {
+            throw new ResourceDoesNotExistException("The comment with the id '" + commentId.getId()
+                    + "' is not in the comment list of the gift with the id '" + giftId.getId() + "'.");
+        }
+
+        if (!userId.getPhone().equals(commentToRemove.getAuthor().getPhone())) {
+            throw new UnauthorizedException("The user with the phone '" + userId.getPhone()
+                    + "' is not the author of this comment and, therefore, he cannot remove it.");
+        }
+
+        gift.getComments().remove(commentToRemove);
+        giftDomainRegistry.save(gift);
+    }
+
+    /**
      * Remove a dislike.
      *
      * @param giftId the gift to update
@@ -119,6 +184,57 @@ public class GiftController {
     @DeleteMapping(value = "/{id}/likes/{phone}")
     public void removeLike(GiftIdData giftId, UserIdData userId) {
         removeLikesOrDislikes(giftId, userId, true);
+    }
+
+    /**
+     * Updates a gift.
+     *
+     * @param giftId the gift to update
+     * @param gift the data to put
+     */
+    @PutMapping(value = "/{id}")
+    public void update(GiftIdData giftId, @RequestBody GiftBasicData gift) {
+        Gift giftToUpdate = giftDomainRegistry.get(giftId);
+        giftToUpdate.setName(gift.getName());
+        giftToUpdate.setDetail(gift.getDetail());
+        if (null != gift.getBuyer()) {
+            User buyer = userDomainRegistry.get(gift.getBuyer());
+            giftToUpdate.setBuyer(buyer);
+        }
+        giftToUpdate.setCollected(gift.isCollected());
+        giftDomainRegistry.save(giftToUpdate);
+    }
+
+    /**
+     * Update a comment.
+     *
+     * @param giftId the gift to update
+     * @param userId the user that updates
+     * @param commentData the comment to update
+     */
+    @PutMapping(value = "/{id}/comments/{phone}")
+    public void updateComment(GiftIdData giftId, UserIdData userId, @RequestBody UpdateGiftCommentRequest commentData) {
+        Gift gift = giftDomainRegistry.get(giftId);
+
+        GiftComment commentToUpdate = null;
+        for (GiftComment comment : gift.getComments()) {
+            if (commentData.getCommentId().getId().longValue() == comment.getId()) {
+                commentToUpdate = comment;
+            }
+        }
+
+        if (null == commentToUpdate) {
+            throw new ResourceDoesNotExistException("The comment with the id '" + commentData.getCommentId().getId()
+                    + "' is not in the comment list of the gift with the id '" + giftId.getId() + "'.");
+        }
+
+        if (!userId.getPhone().equals(commentToUpdate.getAuthor().getPhone())) {
+            throw new UnauthorizedException("The user with the phone '" + userId.getPhone()
+                    + "' is not the author of this comment and, therefore, he cannot udpate it.");
+        }
+
+        commentToUpdate.setComment(commentData.getComment());
+        giftDomainRegistry.save(gift);
     }
 
     /**

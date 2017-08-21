@@ -28,15 +28,15 @@ Validate gift list
 Mark as complete  
 
 /gifts  
+Get gift
 Add like gift (not for author)  
 Remove like gift  
 Add dislike gift (not for author)  
 Remove dislike  
-Assign buyer  
-Mark as collected  
-Update detail  
+Update gift (name, detail, buyer, collected)  
 Add comment  
 Remove comment (only author)  
+Update comment (only author)  
 
 /venues  
 Create venue  
