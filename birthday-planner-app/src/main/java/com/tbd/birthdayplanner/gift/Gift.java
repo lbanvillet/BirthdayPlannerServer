@@ -32,7 +32,7 @@ import com.tbd.birthdayplanner.user.User;
  * @author lb185112
  */
 @Entity
-@Table(name = "gift")
+@Table(name = "bp_gift")
 public class Gift implements Serializable {
 
     /**
@@ -89,7 +89,7 @@ public class Gift implements Serializable {
      * The likes.
      */
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "gift_like", joinColumns = {
+    @JoinTable(name = "bp_gift_like", joinColumns = {
             @JoinColumn(name = "gift_id", nullable = false, updatable = false)
     }, inverseJoinColumns = {
             @JoinColumn(name = "user_id", nullable = false, updatable = false)
@@ -100,7 +100,7 @@ public class Gift implements Serializable {
      * The dislikes.
      */
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "gift_dislike", joinColumns = {
+    @JoinTable(name = "bp_gift_dislike", joinColumns = {
             @JoinColumn(name = "gift_id", nullable = false, updatable = false)
     }, inverseJoinColumns = {
             @JoinColumn(name = "user_id", nullable = false, updatable = false)

@@ -1,0 +1,11 @@
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_user] (phone, name, birth_date, virtual) values ('00447401328766', 'Louis', '1990-10-09', 0);
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_user] (phone, name, birth_date, virtual) values ('00447840006768', 'Jonay', '1983-10-28', 0);
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_user] (phone, name, birth_date, virtual) values ('00447963305591', 'Neil', '1978-05-03', 0);
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_follower] (follower_id, followed_id) values (1, 2);
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_follower] (follower_id, followed_id) values (1, 3);
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_follower] (follower_id, followed_id) values (2, 1);
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_follower] (follower_id, followed_id) values (2, 3);
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_follower] (follower_id, followed_id) values (3, 1);
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_follower] (follower_id, followed_id) values (3, 2);
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_plan] (birthday_guy_id, gift_list_validated, event_completed) values (3, 0, 0);
+insert into [BirthdayPlanner].[BirthdayPlanner].[bp_participation] (participant_id, plan_id, average_price_proposed, is_author, approved) values (1, 1, 0, 1, 1);

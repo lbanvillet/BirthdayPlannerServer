@@ -1,4 +1,4 @@
-create table if not exists user (
+create table if not exists bp_user (
 	id bigint primary key,
 	phone varchar (256) not null,
 	name varchar (256),
@@ -8,12 +8,22 @@ create table if not exists user (
 
 create sequence seq_user start with 1 increment by 1;
 
-create table if not exists user_like (
+create table if not exists bp_user_like (
 	user_id bigint,
 	user_like varchar (2000)
 );
 
-create table if not exists plan (
+create table if not exists bp_user_dislike (
+	user_id bigint,
+	user_dislike varchar (2000)
+);
+
+create table if not exists bp_follower (
+	follower_id bigint,
+	followed_id bigint
+);
+
+create table if not exists bp_plan (
 	id bigint primary key,
 	birthday_guy_id bigint,
 	gift_list_validated char not null,
@@ -22,7 +32,7 @@ create table if not exists plan (
 
 create sequence seq_plan start with 1 increment by 1;
 
-create table if not exists participation (
+create table if not exists bp_participation (
 	id bigint primary key,
 	participant_id bigint,
 	plan_id bigint,
@@ -33,7 +43,7 @@ create table if not exists participation (
 
 create sequence seq_participation start with 1 increment by 1;
 
-create table if not exists gift (
+create table if not exists bp_gift (
 	id bigint primary key,
 	plan_id bigint,
 	name varchar (256),
@@ -45,17 +55,17 @@ create table if not exists gift (
 
 create sequence seq_gift start with 1 increment by 1;
 
-create table if not exists gift_like (
+create table if not exists bp_gift_like (
 	gift_id bigint,
 	user_id bigint
 );
 
-create table if not exists gift_dislike (
+create table if not exists bp_gift_dislike (
 	gift_id bigint,
 	user_id bigint
 );
 
-create table if not exists gift_comment (
+create table if not exists bp_gift_comment (
 	id bigint primary key,
 	gift_id bigint,
 	author_id bigint,

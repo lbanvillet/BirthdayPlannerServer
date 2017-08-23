@@ -1,0 +1,29 @@
+USE [master]
+GO
+
+IF NOT EXISTS(SELECT principal_id FROM sys.server_principals WHERE name = 'birthday_planner_user') BEGIN
+CREATE LOGIN [birthday_planner_user] WITH PASSWORD=N'Password100', DEFAULT_DATABASE=[BirthdayPlanner], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+END
+USE [BirthdayPlanner]
+GO
+CREATE SCHEMA BirthdayPlanner
+GO     
+IF NOT EXISTS(SELECT name FROM sys.database_principals WHERE name = 'birthday_planner_user')
+ BEGIN 
+CREATE USER [birthday_planner_user] FOR LOGIN [birthday_planner_user] WITH DEFAULT_SCHEMA = BirthdayPlanner
+END
+
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = N'birthday_planner_dbrole' AND type = 'R')
+CREATE ROLE [birthday_planner_dbrole] authorization birthday_planner_user
+GO
+
+EXEC sp_addrolemember N'db_datareader', N'birthday_planner_user'
+EXEC sp_addrolemember N'db_datawriter', N'birthday_planner_user'
+EXEC sp_addrolemember N'birthday_planner_dbrole', N'birthday_planner_user'
+
+GRANT ALTER, DELETE, EXECUTE, INSERT, REFERENCES, SELECT,
+          UPDATE, VIEW DEFINITION ON SCHEMA::BirthdayPlanner TO birthday_planner_dbrole;
+
+GRANT CREATE TABLE, CREATE PROCEDURE, CREATE FUNCTION, CREATE VIEW TO birthday_planner_dbrole;
+
+GRANT CONNECT, CONNECT REPLICATION, CHECKPOINT, SUBSCRIBE QUERY NOTIFICATIONS, SHOWPLAN, BACKUP DATABASE, BACKUP LOG TO birthday_planner_dbrole;

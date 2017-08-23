@@ -1,0 +1,10 @@
+drop table [BirthdayPlanner].[BirthdayPlanner].[bp_gift_comment];
+drop table [BirthdayPlanner].[BirthdayPlanner].[bp_gift_dislike];
+drop table [BirthdayPlanner].[BirthdayPlanner].[bp_gift_like];
+drop table [BirthdayPlanner].[BirthdayPlanner].[bp_gift];
+drop table [BirthdayPlanner].[BirthdayPlanner].[bp_participation];
+drop table [BirthdayPlanner].[BirthdayPlanner].[bp_plan];
+drop table [BirthdayPlanner].[BirthdayPlanner].[bp_follower];
+drop table [BirthdayPlanner].[BirthdayPlanner].[bp_user_dislike];
+drop table [BirthdayPlanner].[BirthdayPlanner].[bp_user_like];
+drop table [BirthdayPlanner].[BirthdayPlanner].[bp_user];

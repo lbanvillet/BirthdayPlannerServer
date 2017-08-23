@@ -26,7 +26,7 @@ import com.tbd.birthdayplanner.user.User;
  * @author lb185112
  */
 @Entity
-@Table(name = "participation")
+@Table(name = "bp_participation")
 public class Participation implements Serializable {
 
     /**

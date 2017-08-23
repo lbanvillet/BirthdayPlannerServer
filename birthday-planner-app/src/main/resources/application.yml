@@ -3,7 +3,8 @@ server:
 
 spring:
   jpa:
-    database: hsql  
+    database: hsql
+      
   datasource:
     url: jdbc:hsqldb:mem:testdb
     username: sa
@@ -11,3 +12,19 @@ spring:
 
 flyway:
   locations: classpath:db/migration/${spring.jpa.database}
+  
+  
+---
+
+spring:
+  profiles: sql-server
+  
+  # JPA Properties
+  jpa:
+    database: sql-server
+    
+  # DataSource Properties
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=BirthdayPlanner
+    username: birthday_planner_user
+    password: Password100

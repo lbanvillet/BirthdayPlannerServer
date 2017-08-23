@@ -18,6 +18,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,7 +35,7 @@ import com.tbd.birthdayplanner.validation.ValidKey;
  * @author lb185112
  */
 @Entity
-@Table(name = "user")
+@Table(name = "bp_user")
 public class User implements Serializable {
 
     /**
@@ -83,7 +85,7 @@ public class User implements Serializable {
      * The list of user likes.
      */
     @ElementCollection
-    @CollectionTable(name = "user_like", joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "bp_user_like", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "user_like")
     private List<String> likes;
 
@@ -91,16 +93,19 @@ public class User implements Serializable {
      * The list of user dislikes.
      */
     @ElementCollection
-    @CollectionTable(name = "user_dislike", joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "bp_user_dislike", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "user_dislike")
     private List<String> dislikes;
 
     /**
      * The list of followed users.
      */
-    @ElementCollection
-    @CollectionTable(name = "follower", joinColumns = @JoinColumn(name = "follower_id"))
-    @Column(name = "followed_id")
+    @ManyToMany
+    @JoinTable(name = "bp_follower", joinColumns = {
+            @JoinColumn(name = "follower_id")
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "followed_id")
+    })
     private List<User> followedUsers;
 
     /**

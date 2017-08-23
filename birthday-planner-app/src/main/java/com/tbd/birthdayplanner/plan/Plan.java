@@ -32,7 +32,7 @@ import com.tbd.birthdayplanner.user.User;
  * @author lb185112
  */
 @Entity
-@Table(name = "plan")
+@Table(name = "bp_plan")
 public class Plan implements Serializable {
 
     /**
@@ -77,7 +77,7 @@ public class Plan implements Serializable {
     /**
      * Whether the plan's gift list has been validated or not.
      */
-    @Column(name = "is_gift_list_validated")
+    @Column(name = "gift_list_validated")
     private boolean giftListValidated = false;
 
     /**
